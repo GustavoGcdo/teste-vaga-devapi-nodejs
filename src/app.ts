@@ -2,6 +2,7 @@ import cors from 'cors';
 import express, { Application } from 'express';
 import mongoose, { Connection } from 'mongoose';
 import config from './config';
+import { makeAuthRoutes } from './factories/auth-route.factory';
 import { makeInfoRoutes } from './factories/info-route.factory';
 
 export class App {
@@ -25,6 +26,7 @@ export class App {
 
   private configureRoutes() {
     this.app.use(makeInfoRoutes().getRouter());
+    this.app.use(makeAuthRoutes().getRouter());
   }
 
   private async connectToDatabase() {

@@ -1,6 +1,6 @@
 import supertest from 'supertest';
-import { App } from '../../src/app';
-import { HttpStatus } from '../../src/presentation/helper/enums/http-status.enum';
+import { App } from '../../../src/app';
+import { HttpStatus } from '../../../src/presentation/helper/enums/http-status.enum';
 
 describe('info route', () => {
   const app = new App();
