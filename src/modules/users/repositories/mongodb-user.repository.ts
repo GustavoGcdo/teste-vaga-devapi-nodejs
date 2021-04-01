@@ -13,4 +13,9 @@ export class MongoDBUserRepository implements IUserRepository {
     const userCreated = await userSchema.create(user);
     return MongoDBUserMapper.toUser(userCreated);
   }
+
+  async findByEmailAndPassword(email: string, password: string): Promise<User | null> {
+    const userFound = await userSchema.findOne({ email, password });
+    return userFound ? MongoDBUserMapper.toUser(userFound) : null;
+  }
 }

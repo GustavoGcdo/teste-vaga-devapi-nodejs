@@ -13,6 +13,7 @@ export class AuthRoutes implements Route {
 
   getRouter() {
     this.router.post('/auth/signup', (req, res) => this.controller.signup(req, res));
+    this.router.post('/auth/login', (req, res) => this.controller.login(req, res));
 
     return this.router;
   }
