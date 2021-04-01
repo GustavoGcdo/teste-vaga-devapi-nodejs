@@ -7,7 +7,7 @@
     "start": "node ./dist/server.js",
     "dev": "cross-env NODE_ENV=dev ts-node-dev --respawn --transpile-only --ignore-watch node_modules --no-notify  ./src/server.ts",
     "build": "tsc",
-    "test:integration": "jest --config jest.config-integration.js",
+    "test:integration": "cross-env NODE_ENV=test jest --config jest.config-integration.js",
     "test": "cross-env NODE_ENV=test jest"
   },
   "keywords": [],
