@@ -32,10 +32,14 @@ export class App {
   }
 
   private async connectToDatabase() {
-    return mongoose.connect(config.DB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-    });
+    return mongoose
+      .connect(config.DB_URI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+      })
+      .then(() => {
+        console.log('connected to database: ', config.DB_URI);
+      });
   }
 
   public start(): void {
