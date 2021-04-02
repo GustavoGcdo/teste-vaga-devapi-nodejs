@@ -16,12 +16,14 @@ export class CreateConnector implements UseCase<CreateConnectorDto, Result<Conne
   async handle(dto: CreateConnectorDto): Promise<Result<Connector>> {
     this.validate(dto);
 
+    const initialStatus = dto.status === undefined ? true : dto.status;
+
     const connectorToCreate = {
       name: dto.name,
       baseURL: dto.baseURL,
       category: dto.category,
       privacy: dto.privacy,
-      status: dto.status === true,
+      status: initialStatus,
       description: dto.description,
       type: dto.type
     } as Connector;
