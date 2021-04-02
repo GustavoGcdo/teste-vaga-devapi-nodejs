@@ -51,7 +51,7 @@ export class MongoDBConnectorRepository implements IConnectorRepository {
       query.privacy = filter.privacy;
     }
 
-    if (filter.status) {
+    if (filter.status !== undefined) {
       query.status = filter.status;
     }
 
