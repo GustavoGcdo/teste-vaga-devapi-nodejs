@@ -3,4 +3,5 @@ export interface FilterConnector {
   type?: string;
   category?: string;
   privacy?: string;
+  status?: boolean;
 }

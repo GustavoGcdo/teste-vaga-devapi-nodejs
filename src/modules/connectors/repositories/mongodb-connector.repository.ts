@@ -15,7 +15,7 @@ export class MongoDBConnectorRepository implements IConnectorRepository {
   async find(filter: FilterConnector, paginateOptions: PaginateOptions): Promise<PaginateResult<Connector>> {
     const { skip, limit } = paginateOptions;
 
-    const query: any = { status: true };
+    const query: any = {};
 
     if (filter.name) {
       query.name = { $regex: `${filter.name}` };
@@ -31,6 +31,10 @@ export class MongoDBConnectorRepository implements IConnectorRepository {
 
     if (filter.privacy) {
       query.privacy = filter.privacy;
+    }
+
+    if (filter.status) {
+      query.status = filter.status;
     }
 
     const documentsFound = await connectorSchema.find(query).skip(skip).limit(limit);

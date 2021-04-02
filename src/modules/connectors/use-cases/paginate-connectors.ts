@@ -51,11 +51,16 @@ implements UseCase<PaginateConnectorsDto, Result<ConnectorPaginate>> {
   }
 
   private extractFilter(dto: PaginateConnectorsDto): FilterConnector {
+    const defaultStatusValue = true;
+    const statusInBoolean = dto.status === 'true';
+    const filterStatus = dto.status === undefined ? defaultStatusValue : statusInBoolean;
+
     return {
       category: dto.category,
       name: dto.name,
       privacy: dto.privacy,
-      type: dto.type
+      type: dto.type,
+      status: filterStatus
     };
   }
 

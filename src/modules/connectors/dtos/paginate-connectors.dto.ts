@@ -5,4 +5,5 @@ export interface PaginateConnectorsDto {
   type?: string;
   category?: string;
   privacy?: string;
+  status?: string;
 }
