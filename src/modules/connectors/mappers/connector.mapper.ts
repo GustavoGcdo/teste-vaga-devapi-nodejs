@@ -3,7 +3,7 @@ import { Connector } from '../models/connector';
 export class ConnectorMapper {
   public static toDomain(raw: any): Connector {
     return {
-      id: raw._id,
+      id: raw._id.toString(),
       baseURL: raw.baseURL,
       category: raw.category,
       description: raw.description,

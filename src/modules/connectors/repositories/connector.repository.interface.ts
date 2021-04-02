@@ -4,6 +4,8 @@ import { Connector } from '../models/connector';
 import { FilterConnector } from '../models/filter-connector';
 
 export interface IConnectorRepository {
+  update(connector: Connector): Promise<Connector>;
+  findById(id: string): Promise<Connector | null>;
   find(
     filter: FilterConnector,
     paginateOptions: PaginateOptions

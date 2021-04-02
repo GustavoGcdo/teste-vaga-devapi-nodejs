@@ -5,6 +5,7 @@ import { Connector } from '../models/connector';
 import { FilterConnector } from '../models/filter-connector';
 import connectorSchema from '../schemas/connector.schema';
 import { IConnectorRepository } from './connector.repository.interface';
+import mongoose from 'mongoose';
 
 export class MongoDBConnectorRepository implements IConnectorRepository {
   async create(connector: Connector): Promise<Connector> {
@@ -12,7 +13,24 @@ export class MongoDBConnectorRepository implements IConnectorRepository {
     return ConnectorMapper.toDomain(connectorCreated);
   }
 
-  async find(filter: FilterConnector, paginateOptions: PaginateOptions): Promise<PaginateResult<Connector>> {
+  async update(connector: Connector): Promise<Connector> {
+    await connectorSchema.updateOne({ _id: connector.id }, connector);
+    return connector;
+  }
+
+  async findById(id: string): Promise<Connector | null> {
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return null;
+    }
+
+    const foundConnector = await connectorSchema.findOne({ _id: id });
+    return foundConnector ? ConnectorMapper.toDomain(foundConnector) : null;
+  }
+
+  async find(
+    filter: FilterConnector,
+    paginateOptions: PaginateOptions
+  ): Promise<PaginateResult<Connector>> {
     const { skip, limit } = paginateOptions;
 
     const query: any = {};

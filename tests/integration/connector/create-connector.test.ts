@@ -2,6 +2,7 @@ import supertest from 'supertest';
 import { App } from '../../../src/app';
 import { CreateConnectorDto } from '../../../src/modules/connectors/dtos/create-connector.dto';
 import { HttpStatus } from '../../../src/presentation/helper/enums/http-status.enum';
+import { deleteConnector } from '../../helpers/connector-functions';
 import { deleteUser, getValidTokenAndUser } from '../../helpers/user-functions';
 
 describe('create connector route', () => {
@@ -36,6 +37,7 @@ describe('create connector route', () => {
     expect(response.body.success).toBeTruthy();
     expect(response.body.message).toBe('success on create connector');
 
+    await deleteConnector(response.body.data.id);
     await deleteUser(user.id);
   });
 

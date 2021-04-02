@@ -27,6 +27,12 @@ export class ConnectorRoutes implements Route {
       (req, res) => this.controller.create(req, res)
     );
 
+    this.router.put(
+      '/connectors/:id',
+      (req, res, next) => this.auth.authorize(req, res, next),
+      (req, res) => this.controller.update(req, res)
+    );
+
     return this.router;
   }
 }
