@@ -3,6 +3,7 @@ import express, { Application } from 'express';
 import mongoose, { Connection } from 'mongoose';
 import config from './config';
 import { makeAuthRoutes } from './factories/auth-route.factory';
+import { makeConnectorRoutes } from './factories/connector-route.factory';
 import { makeInfoRoutes } from './factories/info-route.factory';
 
 export class App {
@@ -27,6 +28,7 @@ export class App {
   private configureRoutes() {
     this.app.use(makeInfoRoutes().getRouter());
     this.app.use(makeAuthRoutes().getRouter());
+    this.app.use(makeConnectorRoutes().getRouter());
   }
 
   private async connectToDatabase() {
