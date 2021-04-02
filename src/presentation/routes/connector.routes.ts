@@ -33,6 +33,12 @@ export class ConnectorRoutes implements Route {
       (req, res) => this.controller.update(req, res)
     );
 
+    this.router.delete(
+      '/connectors/:id',
+      (req, res, next) => this.auth.authorize(req, res, next),
+      (req, res) => this.controller.remove(req, res)
+    );
+
     return this.router;
   }
 }

@@ -6,6 +6,7 @@ import { ConnectorController } from '../presentation/controllers/connector.contr
 import { AuthMiddleware } from '../presentation/middlewares/auth.middleware';
 import { ConnectorRoutes } from '../presentation/routes/connector.routes';
 import { UpdateConnector } from '../modules/connectors/use-cases/update-connector';
+import { RemoveConnector } from '../modules/connectors/use-cases/remove-connector';
 
 export const makeConnectorRoutes = (): ConnectorRoutes => {
   const connectorRepository = new MongoDBConnectorRepository();
@@ -14,7 +15,14 @@ export const makeConnectorRoutes = (): ConnectorRoutes => {
   const paginateConnectors = new PaginateConnectors(connectorRepository);
   const createConnector = new CreateConnector(connectorRepository);
   const updateConnector = new UpdateConnector(connectorRepository);
-  const controller = new ConnectorController(paginateConnectors, createConnector, updateConnector);
+  const removeConnector = new RemoveConnector(connectorRepository);
+
+  const controller = new ConnectorController(
+    paginateConnectors,
+    createConnector,
+    updateConnector,
+    removeConnector
+  );
   const route = new ConnectorRoutes(controller, authMiddleware);
   return route;
 };
