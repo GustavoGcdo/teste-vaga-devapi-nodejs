@@ -36,11 +36,11 @@ export class MongoDBConnectorRepository implements IConnectorRepository {
     const query: any = {};
 
     if (filter.name) {
-      query.name = { $regex: `${filter.name}` };
+      query.name = { $regex: `${filter.name}`, $options: 'i' };
     }
 
     if (filter.category) {
-      query.category = filter.category;
+      query.category = { $regex: `${filter.category}`, $options: 'i' };
     }
 
     if (filter.type) {
