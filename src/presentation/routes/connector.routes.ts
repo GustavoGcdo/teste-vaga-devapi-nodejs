@@ -15,6 +15,12 @@ export class ConnectorRoutes implements Route {
   }
 
   getRouter() {
+    this.router.get(
+      '/connectors',
+      (req, res, next) => this.auth.authorize(req, res, next),
+      (req, res) => this.controller.paginate(req, res)
+    );
+
     this.router.post(
       '/connectors',
       (req, res, next) => this.auth.authorize(req, res, next),

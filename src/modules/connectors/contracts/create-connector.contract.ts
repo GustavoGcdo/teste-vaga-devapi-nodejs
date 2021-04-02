@@ -21,7 +21,7 @@ export class CreateConnectorContract extends Notifiable implements Contract<Crea
     this.validateType();
     this.validatePrivacy();
 
-    this.addReports(this.reports);
+    this.addReports(this.validator.reports);
     return this.isValid();
   }
 
